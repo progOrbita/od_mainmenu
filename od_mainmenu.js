@@ -20,3 +20,22 @@ $(function () {
         }
     });    
 });
+
+$(document).ready(function(){
+
+    $('.nav-link').on('mouseover', function(e){
+        e.preventDefault();
+        link = prestashop.modules.od_mainmenu.endpoint;
+        let ajaxRequest = $.ajax({
+            url: link,
+            data: {
+                ajax: true,
+                type: 'POST',
+            },
+        });
+        ajaxRequest.done(function(data){
+            console.log(data);
+        });
+
+    });
+});
