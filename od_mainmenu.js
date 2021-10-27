@@ -26,11 +26,14 @@ $(document).ready(function(){
     $('.nav-link').on('mouseover', function(e){
         e.preventDefault();
         link = prestashop.modules.od_mainmenu.endpoint;
+        let depth = $(this).find('.nav-link').attr('data-depth');
+        let stringJson = JSON.stringify(depth);
+
         let ajaxRequest = $.ajax({
             url: link,
             data: {
                 ajax: true,
-                type: 'POST',
+                dataString: stringJson,
             },
         });
         ajaxRequest.done(function(data){

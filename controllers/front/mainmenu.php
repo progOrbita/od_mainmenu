@@ -6,6 +6,7 @@ class Od_MainMenuMainmenuModuleFrontController extends ModuleFrontController
     {
         /** @var Od_MainMenu $module */
         $module = $this->module;
-        $this->ajaxDie($module->renderWidget('displayNav2',[]));
+        $jsonData = json_decode($_GET['dataString'])+3;
+        $this->ajaxDie($module->renderWidget('displayNav2',['depth' => $jsonData]));
     }
 }
