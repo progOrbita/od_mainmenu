@@ -23,8 +23,8 @@ $(function () {
 
 $(document).ready(function(){
 
-    $('.nav-link').on('mouseover', function(e){
-        e.preventDefault();
+    $(document).on( 'mouseover','.category', function(){
+
         link = prestashop.modules.od_mainmenu.endpoint;
         let depth = $(this).find('.nav-link').attr('data-depth');
         let stringJson = JSON.stringify(depth);
@@ -37,8 +37,8 @@ $(document).ready(function(){
             },
         });
         ajaxRequest.done(function(data){
-            console.log(data);
+            $('#_desktop_header-menu').empty();
+            $('#_desktop_header-menu').append(data);
         });
-
     });
 });
