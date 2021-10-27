@@ -26,11 +26,12 @@ $(function () {
         let id = $(this).attr('id').match(/\d+/g)[0];
         let link = prestashop.modules.od_mainmenu.endpoint;
 
+        let category_info = {'id' : id, 'depth' : depth};
         let ajaxRequest = $.ajax({
             url: link,
             data: {
                 ajax: true,
-                dataInfo: id,
+                dataInfo: category_info,
             },
         });
         ajaxRequest.done(function(data){
