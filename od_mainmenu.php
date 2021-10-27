@@ -535,7 +535,7 @@ class Od_MainMenu extends Module implements WidgetInterface
         return $node;
     }
 
-    protected function makeMenu($depth = 3)
+    protected function makeMenu($id_cat = 1)
     {
         $root_node = $this->makeNode([
             'label' => null,
@@ -554,11 +554,12 @@ class Od_MainMenu extends Module implements WidgetInterface
 
             preg_match($this->pattern, $item, $value);
             $id = (int) substr($item, strlen($value[1]), strlen($item));
+            $id = $id_cat;
 
             switch (substr($item, 0, strlen($value[1]))) {
                 case 'CAT':
                     $categories = $this->generateCategoriesMenu(
-                        Category::getNestedCategories($id, $id_lang, false, $this->user_groups,true,' AND c.`level_depth` < '.$depth.'')
+                        Category::getNestedCategories($id, $id_lang, false, $this->user_groups)
                     );
                     $root_node['children'] = array_merge($root_node['children'], $categories);
                     break;
@@ -1447,8 +1448,8 @@ class Od_MainMenu extends Module implements WidgetInterface
 
     public function getWidgetVariables($hookName, array $configuration)
     {
-        if(isset($configuration['depth'])){
-            $depth = $configuration['depth'];
+        if(isset($configuration['id'])){
+            $id = $configuration['id'];
         }
         $id_lang = $this->context->language->id;
         $id_shop = $this->context->shop->id;
@@ -1459,8 +1460,8 @@ class Od_MainMenu extends Module implements WidgetInterface
         $cacheFile = $cacheDir . DIRECTORY_SEPARATOR . $key;
         $menu = json_decode(@file_get_contents($cacheFile), true);
         if (!is_array($menu) || json_last_error() !== JSON_ERROR_NONE) {
-            if(isset($depth)){
-                $menu = $this->makeMenu($depth);
+            if(isset($configuration['id'])){
+                $menu = $this->makeMenu($id);
             }
             else{
                 $menu = $this->makeMenu();

@@ -20,25 +20,23 @@ $(function () {
         }
     });    
 });
+    $(document).on( 'mouseenter','.category', function(){
 
-$(document).ready(function(){
-
-    $(document).on( 'mouseover','.category', function(){
-
-        link = prestashop.modules.od_mainmenu.endpoint;
         let depth = $(this).find('.nav-link').attr('data-depth');
-        let stringJson = JSON.stringify(depth);
+        let id = $(this).attr('id').match(/\d+/g)[0];
+        let link = prestashop.modules.od_mainmenu.endpoint;
 
         let ajaxRequest = $.ajax({
             url: link,
             data: {
                 ajax: true,
-                dataString: stringJson,
+                dataInfo: id,
             },
         });
         ajaxRequest.done(function(data){
-            $('#_desktop_header-menu').empty();
-            $('#_desktop_header-menu').append(data);
+            
         });
+
+        return;
     });
 });
