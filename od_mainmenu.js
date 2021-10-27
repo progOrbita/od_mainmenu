@@ -18,7 +18,7 @@ $(function () {
             $(this).find("ul[data-depth='3']").parent().removeClass('hidden');
             $(this).find("ul[data-depth='3']").parent().attr('aria-expanded', true);
         }
-    });    
+    });
 });
     $(document).on( 'mouseenter','.category', function(){
 
@@ -35,9 +35,10 @@ $(function () {
             },
         });
         ajaxRequest.done(function(data){
-            
+
+            $('#top-menu:nth-child(2)').remove();
+            $('#top-menu').append(data);
         });
 
         return;
     });
-});
