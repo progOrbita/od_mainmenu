@@ -535,7 +535,7 @@ class Od_MainMenu extends Module implements WidgetInterface
         return $node;
     }
 
-    protected function makeMenu($id_cat = 1)
+    protected function makeMenu($id_cat = 1, $depth = 0)
     {
         $root_node = $this->makeNode([
             'label' => null,
@@ -559,7 +559,7 @@ class Od_MainMenu extends Module implements WidgetInterface
             switch (substr($item, 0, strlen($value[1]))) {
                 case 'CAT':
                     $categories = $this->generateCategoriesMenu(
-                        Category::getNestedCategories($id, $id_lang, false, $this->user_groups)
+                        Category::getNestedCategories($id, $id_lang, false, $this->user_groups,true,"AND c.`level_depth` < ".($depth+3)." ")
                     );
                     $root_node['children'] = array_merge($root_node['children'], $categories);
                     break;
@@ -1450,6 +1450,7 @@ class Od_MainMenu extends Module implements WidgetInterface
     {
         if(isset($configuration['id'])){
             $id = $configuration['id'];
+            $depth = $configuration['depth'];
         }
         $id_lang = $this->context->language->id;
         $id_shop = $this->context->shop->id;
@@ -1461,7 +1462,7 @@ class Od_MainMenu extends Module implements WidgetInterface
         $menu = json_decode(@file_get_contents($cacheFile), true);
         if (!is_array($menu) || json_last_error() !== JSON_ERROR_NONE) {
             if(isset($configuration['id'])){
-                $menu = $this->makeMenu($id);
+                $menu = $this->makeMenu($id,$depth);
             }
             else{
                 $menu = $this->makeMenu();
