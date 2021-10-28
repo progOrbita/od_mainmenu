@@ -1486,7 +1486,10 @@ class Od_MainMenu extends Module implements WidgetInterface
         $this->smarty->assign([
             'menu' => $this->getWidgetVariables($hookName, $configuration)
         ]);
-        if(isset($configuration['id_category'])){
+        if (isset($configuration['id_category'])) {
+            $this->smarty->assign([
+                'base_depth' => $configuration['depth']
+            ]);
             return $this->fetch('module:od_mainmenu/od_childs.tpl');
         }
         return $this->fetch('module:od_mainmenu/od_mainmenu.tpl');

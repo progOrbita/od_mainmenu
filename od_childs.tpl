@@ -34,13 +34,14 @@
     {if $depth > $base_depth}<ul class="top-menu" data-depth="{$depth}">{/if}
       {foreach from=$nodes item=node}
         {assign var=_haschild value=$node.children|count}
+        {if $depth > $base_depth}<li class="{$node.type}{if $node.current} current {/if}" id="{$node.page_identifier}">{/if}
             <div class="item-header">
               <a class="nav-link" href="{$node.url}" data-depth="{$depth}"{if $node.open_in_new_window} target="_blank"{/if}>{$node.label}</a>
             </div>
           {/if}
           {if $_haschild}
               <div class="collapse" id="top_sub_menu_{$_expand_id}">
-                {menu nodes=$node.children depth=$node.depth parent=$node}
+              {menu nodes=$node.children depth=$base_depth+1 parent=$node}
           {/if}
         </li>
       {/foreach}
@@ -49,5 +50,5 @@
 {/function}
 
 {*<div class="menu js-top-menu col">*}
-    {menu nodes=$menu.children depth=1}
+    {menu nodes=$menu.children depth=$base_depth}
 {*</div>*}
