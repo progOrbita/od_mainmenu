@@ -73,7 +73,7 @@ class Od_MainMenu extends Module implements WidgetInterface
             !$this->registerHook('categoryUpdate') ||
             !$this->registerHook('actionShopDataDuplication') ||
             !$this->registerHook('displayTop')
-            
+
         ) {
             return false;
         }
@@ -554,12 +554,12 @@ class Od_MainMenu extends Module implements WidgetInterface
 
             preg_match($this->pattern, $item, $value);
             $id = (int) substr($item, strlen($value[1]), strlen($item));
-            
+
             switch (substr($item, 0, strlen($value[1]))) {
                 case 'CAT':
                     $id = $id_cat;
                     $categories = $this->generateCategoriesMenu(
-                        Category::getNestedCategories($id, $id_lang, false, $this->user_groups,true,"AND c.`level_depth` < ".($depth+3)." ")
+                        Category::getNestedCategories($id, $id_lang, false, $this->user_groups, true, " AND c.`level_depth` < " . ($depth + 3) . " ")
                     );
                     $root_node['children'] = array_merge($root_node['children'], $categories);
                     break;
