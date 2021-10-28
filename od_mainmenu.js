@@ -3,6 +3,8 @@
 
 /*import $ from 'jquery';*/
 
+//main already inserted
+const categories_displayed = ['1'];
 $(function () {
     // Ocultar todos los elementos en depth=3 (limpiar el submenu)
     $("ul[data-depth='2']").find("ul[data-depth='3']").parent().addClass('hidden');
@@ -21,11 +23,15 @@ $(function () {
     });
 });
     $(document).on( 'mouseenter','.category', function(){
+        let id_category = $(this).attr('id').match(/\d+/g)[0];
+
+        if(categories_displayed.includes(id_category)){
+            return;
+        }
         let item = $(this);
         $(this).find('.item-header').addClass('collapsed');
         $(this).find('.item-header').attr('aria-expanded',false);
         let depth = $(this).find('.nav-link').attr('data-depth');
-        let id_category = $(this).attr('id').match(/\d+/g)[0];
         let link = prestashop.modules.od_mainmenu.endpoint;
 
         let ajaxRequest = $.ajax({
@@ -35,8 +41,9 @@ $(function () {
             },
         });
         ajaxRequest.done(function(data){
-
+            //Append to the end
             item.append(data);
+            categories_displayed.push(id_category);
         });
 
         return;
