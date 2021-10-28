@@ -28,6 +28,7 @@ $(function () {
         if(categories_displayed.includes(id_category)){
             return;
         }
+        categories_displayed.push(id_category);
         let item = $(this);
         $(this).find('.item-header').addClass('collapsed');
         $(this).find('.item-header').attr('aria-expanded',false);
@@ -39,12 +40,10 @@ $(function () {
             data: {
                 ajax: true,id_category,depth,
             },
+            success: function(data){
+                //Append to the end
+                item.append(data);
                 item.find('.collapse').addClass('show');
-        });
-        ajaxRequest.done(function(data){
-            //Append to the end
-            item.append(data);
-            categories_displayed.push(id_category);
         });
 
         return;
