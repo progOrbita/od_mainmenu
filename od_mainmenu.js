@@ -39,6 +39,7 @@ $(function () {
             data: {
                 ajax: true,id_category,depth,
             },
+                item.find('.collapse').addClass('show');
         });
         ajaxRequest.done(function(data){
             //Append to the end

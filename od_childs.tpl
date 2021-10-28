@@ -44,7 +44,7 @@
             </div>
           {/if}
           {if $_haschild}
-            <div class="collapse show" id="top_sub_menu_{$_expand_id}">
+            <div class="collapse" id="top_sub_menu_{$_expand_id}">
               {menu nodes=$node.children depth=$base_depth+1 parent=$node}
             </div>
           {/if}
