@@ -25,6 +25,9 @@ $(function () {
     $(document).on( 'mouseenter','.category', function(){
         let id_category = $(this).attr('id').match(/\d+/g)[0];
 
+        if(depth > 2){
+            return;
+        }
         if(categories_displayed.includes(id_category)){
             return;
         }
