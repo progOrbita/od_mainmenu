@@ -10,17 +10,17 @@ $(function () {
     
     $("ul[data-depth='2']").on('mouseover', ' li', function() {
     $(document).on('mouseover', "ul[data-depth='2'] li", function() {
-        // Ocultar todos los elementos en depth=3 (limpiar el submenu)
+        // Hide all the elements in depth=3 (cleans the submenu)
         $("ul[data-depth='2']").find("ul[data-depth='3']").parent().removeClass('show');
         $("ul[data-depth='2']").find("ul[data-depth='3']").parent().addClass('hidden');
         $("ul[data-depth='2']").find("ul[data-depth='3']").parent().attr('aria-expanded', false);
-        // Mostrar solo los children del elemento sobre el que estamos
+        // Shows only the children of the element where we stood
         if(this.children[1]) {
             $(this).find("ul[data-depth='3']").parent().removeClass('hidden');
             $(this).find("ul[data-depth='3']").parent().attr('aria-expanded', true);
         }
     });
-});
+
     $(document).on( 'mouseenter','.category', function(){
 
         $(this).data('id',$(this).attr('id').match(/\d+/g)[0]);
@@ -29,6 +29,7 @@ $(function () {
         $(this).data('depth',$(this).find('.nav-link').attr('data-depth'));
         let depth = $(this).data('depth');
         
+        //Avoid ajax calls for elements that cant have childs
         if(depth > 2){
             return;
         }
@@ -46,9 +47,10 @@ $(function () {
                 ajax: true,id_category,depth,
             },
             success: function(data){
-                //Append to the end
+                //Append to the end of the div
                 item.append(data);
                 item.find('.collapse').addClass('show');
+                //Cleans the elements with depth=3 when inserted
                 if(depth == 2){
                     $("ul[data-depth='2']").find("ul[data-depth='3']").parent().addClass('hidden');
                     $("ul[data-depth='2']").find("ul[data-depth='3']").parent().attr('aria-expanded', false);
@@ -56,6 +58,7 @@ $(function () {
             }
         });
     });
+    //Close open tab when entering in the menu
     $(document).on( 'mouseenter','#top-menu', function(){
         $(this).find('.collapse .show').removeClass('show');
     });
