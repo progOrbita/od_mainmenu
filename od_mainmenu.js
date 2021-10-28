@@ -36,8 +36,7 @@ $(function () {
         $(this).find('.item-header').attr('aria-expanded',false);
         let depth = $(this).find('.nav-link').attr('data-depth');
         let link = prestashop.modules.od_mainmenu.endpoint;
-
-        let ajaxRequest = $.ajax({
+        $.ajax({
             url: link,
             data: {
                 ajax: true,id_category,depth,
@@ -53,8 +52,7 @@ $(function () {
                 }
             }
         });
-
-        return;
+    });
     $(document).on( 'mouseenter','#top-menu', function(){
         $(this).find('.collapse .show').removeClass('show');
     });
