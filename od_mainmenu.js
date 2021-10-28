@@ -40,9 +40,8 @@ $(function () {
         $(this).find('.item-header').addClass('collapsed');
         $(this).find('.item-header').attr('aria-expanded',false);
         
-        let link = prestashop.modules.od_mainmenu.endpoint;
         $.ajax({
-            url: link,
+            url: prestashop.modules.od_mainmenu.endpoint,
             data: {
                 ajax: true,id_category,depth,
             },
@@ -51,7 +50,6 @@ $(function () {
                 item.append(data);
                 item.find('.collapse').addClass('show');
                 if(depth == 2){
-                    $("ul[data-depth='2']").find("ul[data-depth='3']").parent().removeClass('show');
                     $("ul[data-depth='2']").find("ul[data-depth='3']").parent().addClass('hidden');
                     $("ul[data-depth='2']").find("ul[data-depth='3']").parent().attr('aria-expanded', false);
                 }
