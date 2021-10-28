@@ -55,4 +55,6 @@ $(function () {
         });
 
         return;
+    $(document).on( 'mouseenter','#top-menu', function(){
+        $(this).find('.collapse .show').removeClass('show');
     });
