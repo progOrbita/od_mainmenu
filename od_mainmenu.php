@@ -1465,10 +1465,9 @@ class Od_MainMenu extends Module implements WidgetInterface
         $cacheFile = $cacheDir . DIRECTORY_SEPARATOR . $key;
         $menu = json_decode(@file_get_contents($cacheFile), true);
         if (!is_array($menu) || json_last_error() !== JSON_ERROR_NONE) {
-            if(isset($configuration['id'])){
-                $menu = $this->makeMenu($id,$depth);
-            }
-            else{
+            if (isset($configuration['id_category'])) {
+                $menu = $this->makeMenu($id, $depth);
+            } else {
                 $menu = $this->makeMenu();
             }
             // if (!is_dir($cacheDir)) {
