@@ -31,10 +31,9 @@
 {assign var=_counter value=0}
 {function name="menu" nodes=[] depth=0 parent=null}
   {if $nodes|count}
-    {if $depth > 0}<ul class="top-menu" data-depth="{$depth}">{/if}
+    {if $depth > $base_depth}<ul class="top-menu" data-depth="{$depth}">{/if}
       {foreach from=$nodes item=node}
         {assign var=_haschild value=$node.children|count}
-          {if $depth > 0}<li class="{$node.type}{if $node.current} current {/if}" id="{$node.page_identifier}">{/if}
             <div class="item-header">
               <a class="nav-link" href="{$node.url}" data-depth="{$depth}"{if $node.open_in_new_window} target="_blank"{/if}>{$node.label}</a>
             </div>
