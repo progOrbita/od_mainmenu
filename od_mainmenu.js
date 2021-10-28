@@ -22,6 +22,8 @@ $(function () {
 });
     $(document).on( 'mouseenter','.category', function(){
         let item = $(this);
+        $(this).find('.item-header').addClass('collapsed');
+        $(this).find('.item-header').attr('aria-expanded',false);
         let depth = $(this).find('.nav-link').attr('data-depth');
         let id_category = $(this).attr('id').match(/\d+/g)[0];
         let link = prestashop.modules.od_mainmenu.endpoint;
