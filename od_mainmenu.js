@@ -7,8 +7,6 @@
 const categories_displayed = ['1'];
 $(function () {
     // Ocultar todos los elementos en depth=3 (limpiar el submenu)
-    $("ul[data-depth='2']").find("ul[data-depth='3']").parent().addClass('hidden');
-    $("ul[data-depth='2']").find("ul[data-depth='3']").parent().attr('aria-expanded', false);
     
     $("ul[data-depth='2']").on('mouseover', ' li', function() {
         // Ocultar todos los elementos en depth=3 (limpiar el submenu)
@@ -47,6 +45,12 @@ $(function () {
                 //Append to the end
                 item.append(data);
                 item.find('.collapse').addClass('show');
+                if(depth == 2){
+                    $("ul[data-depth='2']").find("ul[data-depth='3']").parent().removeClass('show');
+                    $("ul[data-depth='2']").find("ul[data-depth='3']").parent().addClass('hidden');
+                    $("ul[data-depth='2']").find("ul[data-depth='3']").parent().attr('aria-expanded', false);
+                }
+            }
         });
 
         return;
