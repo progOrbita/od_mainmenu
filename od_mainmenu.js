@@ -21,7 +21,7 @@ $(function () {
     });
 });
     $(document).on( 'mouseenter','.category', function(){
-
+        let item = $(this);
         let depth = $(this).find('.nav-link').attr('data-depth');
         let id_category = $(this).attr('id').match(/\d+/g)[0];
         let link = prestashop.modules.od_mainmenu.endpoint;
@@ -34,8 +34,7 @@ $(function () {
         });
         ajaxRequest.done(function(data){
 
-            $('#top-menu:nth-child(2)').remove();
-            $('#top-menu').append(data);
+            item.append(data);
         });
 
         return;
