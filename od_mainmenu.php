@@ -1448,12 +1448,16 @@ class Od_MainMenu extends Module implements WidgetInterface
 
     public function getWidgetVariables($hookName, array $configuration)
     {
-        if(isset($configuration['id'])){
-            $id = $configuration['id'];
-            $depth = $configuration['depth'];
-        }
         $id_lang = $this->context->language->id;
         $id_shop = $this->context->shop->id;
+
+        if (isset($configuration['id_category'])) {
+            $depth = $configuration['depth'];
+            $id = $configuration['id_category'];
+            if (empty(Category::getChildren($id, $id_lang))) {
+                return;
+            }
+        }
 
         $this->user_groups = Customer::getGroupsStatic($this->context->customer->id);
         $key = self::MENU_JSON_CACHE_KEY . '_' . $id_lang . '_' . $id_shop . join('_', $this->user_groups) . '.json';
