@@ -22,8 +22,13 @@ $(function () {
     });
 });
     $(document).on( 'mouseenter','.category', function(){
-        let id_category = $(this).attr('id').match(/\d+/g)[0];
 
+        $(this).data('id',$(this).attr('id').match(/\d+/g)[0]);
+        let id_category = $(this).data('id');
+
+        $(this).data('depth',$(this).find('.nav-link').attr('data-depth'));
+        let depth = $(this).data('depth');
+        
         if(depth > 2){
             return;
         }
@@ -34,7 +39,7 @@ $(function () {
         let item = $(this);
         $(this).find('.item-header').addClass('collapsed');
         $(this).find('.item-header').attr('aria-expanded',false);
-        let depth = $(this).find('.nav-link').attr('data-depth');
+        
         let link = prestashop.modules.od_mainmenu.endpoint;
         $.ajax({
             url: link,
