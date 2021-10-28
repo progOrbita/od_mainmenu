@@ -6,8 +6,7 @@ class Od_MainMenuMainmenuModuleFrontController extends ModuleFrontController
     {
         /** @var Od_MainMenu $module */
         $module = $this->module;
-        $cat_info = Tools::getValue('dataInfo');
 
-        $this->ajaxDie($module->renderWidget('displayNav2',['id' => $cat_info['id'], 'depth' => $cat_info['depth']]));
+        $this->ajaxDie($module->renderWidget('displayNav2',['id_category' => Tools::getValue('id_category'), 'depth' => Tools::getValue('depth')]));
     }
 }

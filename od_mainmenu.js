@@ -23,15 +23,13 @@ $(function () {
     $(document).on( 'mouseenter','.category', function(){
 
         let depth = $(this).find('.nav-link').attr('data-depth');
-        let id = $(this).attr('id').match(/\d+/g)[0];
+        let id_category = $(this).attr('id').match(/\d+/g)[0];
         let link = prestashop.modules.od_mainmenu.endpoint;
 
-        let category_info = {'id' : id, 'depth' : depth};
         let ajaxRequest = $.ajax({
             url: link,
             data: {
-                ajax: true,
-                dataInfo: category_info,
+                ajax: true,id_category,depth,
             },
         });
         ajaxRequest.done(function(data){
