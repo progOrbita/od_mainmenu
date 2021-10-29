@@ -535,7 +535,7 @@ class Od_MainMenu extends Module implements WidgetInterface
         return $node;
     }
 
-    protected function makeMenu($id_cat = 1, $depth = 0)
+    protected function makeMenu($id_cat, $depth = 0)
     {
         $root_node = $this->makeNode([
             'label' => null,
@@ -1468,7 +1468,8 @@ class Od_MainMenu extends Module implements WidgetInterface
             if (isset($configuration['id_category'])) {
                 $menu = $this->makeMenu($id, $depth);
             } else {
-                $menu = $this->makeMenu();
+                $root_id = (int) Db::getInstance()->getValue('SELECT id_category FROM ' . _DB_PREFIX_ . 'category WHERE `is_root_category` = 1');
+                $menu = $this->makeMenu($root_id);
             }
             // if (!is_dir($cacheDir)) {
             //     mkdir($cacheDir);
