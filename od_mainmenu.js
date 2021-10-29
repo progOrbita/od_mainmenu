@@ -31,8 +31,6 @@ var request;
         $(this).data('depth',$(this).find('.nav-link').attr('data-depth'));
         let depth = $(this).data('depth');
         
-        //Avoid ajax calls for elements that cant have childs
-        if(depth > 2){
         if(categories_displayed.includes(id_category)){
             return;
         }
