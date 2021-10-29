@@ -12,6 +12,9 @@ var category;
 var request;
 
     $(document).on('mouseover', "ul[data-depth='2'] li", function() {
+        $('#top-menu').find('.underline').removeClass('underline');
+        $(this).find('.item-header > a[data-depth="2"]').addClass('underline');
+        
         // Hide all the elements in depth=3 (cleans the submenu)
         $("ul[data-depth='2']").find("ul[data-depth='3']").parent().removeClass('show');
         $("ul[data-depth='2']").find("ul[data-depth='3']").parent().addClass('hidden');
