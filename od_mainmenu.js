@@ -3,12 +3,14 @@
 
 /*import $ from 'jquery';*/
 
-//main already inserted
-const categories_displayed = ['1'];
 $(function () {
     // Ocultar todos los elementos en depth=3 (limpiar el submenu)
     
     $("ul[data-depth='2']").on('mouseover', ' li', function() {
+const categories_displayed = [1];
+var category;
+var request;
+
     $(document).on('mouseover', "ul[data-depth='2'] li", function() {
         // Hide all the elements in depth=3 (cleans the submenu)
         $("ul[data-depth='2']").find("ul[data-depth='3']").parent().removeClass('show');
@@ -31,9 +33,12 @@ $(function () {
         
         //Avoid ajax calls for elements that cant have childs
         if(depth > 2){
+        if(categories_displayed.includes(id_category)){
             return;
         }
-        if(categories_displayed.includes(id_category)){
+
+        if(category == id_category){
+
             return;
         }
         categories_displayed.push(id_category);
@@ -41,7 +46,8 @@ $(function () {
         $(this).find('.item-header').addClass('collapsed');
         $(this).find('.item-header').attr('aria-expanded',false);
         
-        $.ajax({
+        category = id_category;
+        request = $.ajax({
             url: prestashop.modules.od_mainmenu.endpoint,
             data: {
                 ajax: true,id_category,depth,
