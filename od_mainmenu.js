@@ -39,11 +39,10 @@ var request;
             return;
         }
         categories_displayed.push(id_category);
-        let item = $(this);
-        $(this).find('.item-header').addClass('collapsed');
-        $(this).find('.item-header').attr('aria-expanded',false);
-        
         category = id_category;
+
+        selected_cat.find('.item-header').addClass('collapsed');
+        selected_cat.find('.item-header').attr('aria-expanded',false);
         request = $.ajax({
             url: prestashop.modules.od_mainmenu.endpoint,
             data: {
@@ -51,8 +50,8 @@ var request;
             },
             success: function(data){
                 //Append to the end of the div
-                item.append(data);
-                item.find('.collapse').addClass('show');
+              selected_cat.append(data);
+              selected_cat.find('.collapse').addClass('show');
                 //Cleans the elements with depth=3 when inserted
                 if(depth == 2){
                     $("ul[data-depth='2']").find("ul[data-depth='3']").parent().addClass('hidden');
