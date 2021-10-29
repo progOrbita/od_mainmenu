@@ -53,6 +53,10 @@ var request;
             },
             success: function(data){
                 categories_displayed.push(id_category);
+                //arrow (hidden) of each category
+                selected_cat.find('.item-header').append(`<span class="nav-link d-touch-block right">
+                <span class="collapse-icon"></span>
+                </span>`);
                 //Append to the end of the div
               selected_cat.append(data);
               selected_cat.find('.collapse').addClass('show');
