@@ -42,6 +42,10 @@ var request;
 
         selected_cat.find('.item-header').addClass('collapsed');
         selected_cat.find('.item-header').attr('aria-expanded',false);
+
+        if(request){
+            request.abort();
+        }
         request = $.ajax({
             url: prestashop.modules.od_mainmenu.endpoint,
             data: {
