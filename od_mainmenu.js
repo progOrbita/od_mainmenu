@@ -38,7 +38,6 @@ var request;
 
             return;
         }
-        categories_displayed.push(id_category);
         category = id_category;
 
         selected_cat.find('.item-header').addClass('collapsed');
@@ -49,6 +48,7 @@ var request;
                 ajax: true,id_category,depth,
             },
             success: function(data){
+                categories_displayed.push(id_category);
                 //Append to the end of the div
               selected_cat.append(data);
               selected_cat.find('.collapse').addClass('show');
