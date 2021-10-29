@@ -44,7 +44,6 @@ var request;
         category = id_category;
 
         selected_cat.find('.item-header').addClass('collapsed');
-        selected_cat.find('.item-header').attr('aria-expanded',false);
 
         if(request){
             request.abort();
