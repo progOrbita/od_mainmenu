@@ -36,15 +36,13 @@
         {assign var=_haschild value=$node.children|count}
         {if $depth > $base_depth}<li class="{$node.type}{if $node.current} current {/if}" id="{$node.page_identifier}">{/if}
           {assign var=_counter value=$_counter+1}
-          {if $_haschild}
-            {assign var=_expand_id value=10|mt_rand:100000}
-          {else}
+          {if !$_haschild}
             <div class="item-header">
               <a class="nav-link" href="{$node.url}" data-depth="{$depth}"{if $node.open_in_new_window} target="_blank"{/if}>{$node.label}</a>
             </div>
           {/if}
           {if $_haschild}
-            <div class="collapse" id="top_sub_menu_{$_expand_id}">
+            <div class="collapse">
               {menu nodes=$node.children depth=$base_depth+1 parent=$node}
             </div>
           {/if}
