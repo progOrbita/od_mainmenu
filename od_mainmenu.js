@@ -54,6 +54,11 @@ var request;
                 ajax: true,id_category,depth,
             },
             success: function(data){
+                //empty, parents without childs.
+                if(data.replace(/\s/g,"") == ""){
+                    return;
+                }
+
                 categories_displayed.push(id_category);
                 //arrow (hidden) of each category
                 selected_cat.find('.item-header').append(`<span class="nav-link d-touch-block right">
