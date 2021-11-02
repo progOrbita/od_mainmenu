@@ -27,29 +27,39 @@
     {menu nodes=$menu.children}
 </div>
 *}
+{assign var=_hasparents value=$parents}
 
 {assign var=_counter value=0}
 {function name="menu" nodes=[] depth=0 parent=null}
   {if $nodes|count}
-    {if $depth > $base_depth}<ul class="top-menu" data-depth="{$depth}">{/if}
+    <ul class="top-menu" data-depth="{$depth}">
       {foreach from=$nodes item=node}
-        {assign var=_haschild value=$node.children|count}
-        {if $depth > $base_depth}<li class="{$node.type}{if $node.current} current {/if}" id="{$node.page_identifier}">{/if}
+        <li class="{$node.type}{if $node.current} current {/if}" id="{$node.page_identifier}">
           {assign var=_counter value=$_counter+1}
-          {if !$_haschild}
+          {if $_hasparents[{$node.label}]}
+            {assign var=_expand_id value=10|mt_rand:100000}
+            <div data-target="#top_sub_menu_{$_expand_id}" data-toggle="collapse" class="item-header collapsed" aria-expanded="false">
+              <a class="nav-link" href="{$node.url}" data-depth="{$depth}"{if $node.open_in_new_window} target="_blank"{/if}>{$node.label}</a>
+              {* Cannot use page identifier as we can have the same page several times *}
+              <span class="nav-link d-touch-block {if $depth === 1}right{/if}">
+                <span class="collapse-icon"></span>
+              </span>
+            </div>
+
+          {else}
             <div class="item-header">
               <a class="nav-link" href="{$node.url}" data-depth="{$depth}"{if $node.open_in_new_window} target="_blank"{/if}>{$node.label}</a>
             </div>
           {/if}
-          {if $_haschild}
-            <div class="collapse">
+          {if $_hasparents[{$node.label}]}
+          <div class="collapse" id="top_sub_menu_{$_expand_id}">
               {menu nodes=$node.children depth=$base_depth+1 parent=$node}
-            </div>
+          </div>
           {/if}
         </li>
       {/foreach}
     </ul>
-  {/if}
+{/if}
 {/function}
 
 {*<div class="menu js-top-menu col">*}
