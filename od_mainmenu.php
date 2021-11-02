@@ -1487,12 +1487,10 @@ class Od_MainMenu extends Module implements WidgetInterface
 
     public function renderWidget($hookName, array $configuration)
     {
-        $parents_query = Db::getInstance()->executeS('SELECT DISTINCT ca.id_parent FROM `'._DB_PREFIX_.'category` ca
-        INNER JOIN `'._DB_PREFIX_.'category_lang` cl WHERE cl.id_category = ca.id_category AND cl.id_lang = 1');
+        $parents_query = Db::getInstance()->executeS('SELECT DISTINCT id_parent FROM `'._DB_PREFIX_.'category`');
         $parents = [];
         foreach ($parents_query as $key => $value) {
-            $parent_name = Db::getInstance()->getValue('SELECT name FROM '._DB_PREFIX_.'category_lang WHERE id_category = '.$value['id_parent']);
-            $parents[$parent_name] = 1;
+            $parents['category-'.$value['id_parent']] = 1;
         }
 
         //parents list of names of the categories that are parents
