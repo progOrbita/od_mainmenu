@@ -38,12 +38,9 @@ var request;
         }
 
         if(category == id_category){
-
             return;
         }
         category = id_category;
-
-        selected_cat.find('.item-header').addClass('collapsed');
 
         if(request){
             request.abort();
