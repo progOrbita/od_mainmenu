@@ -35,6 +35,7 @@ if(width < 768){
         });
     }
 
+    $(document).on( 'mouseenter','.category', function(){
         let selected_cat = $(this);
         let id_category = parseInt(selected_cat.attr('id').match(/\d+/g)[0]);
                 
@@ -62,23 +63,11 @@ if(width < 768){
                 if(data.replace(/\s/g,"") == ""){
                     return;
                 }
-
                 categories_displayed.push(id_category);
-                let random = Math.floor((Math.random() * 100000) +1 );
-                selected_cat.find('.item-header').addClass('collapsed');
-                selected_cat.find('.item-header').attr('data-target','#top_sub_menu_'+random);
-                selected_cat.find('.item-header').attr('data-toggle','collapse');
-  
-                //arrow (hidden) of each category
-
-                selected_cat.find('.item-header').append(`<span class="nav-link d-touch-block right">
-                <span class="collapse-icon"></span>
-                </span>`);
 
                 //Append to the end of the div
-              selected_cat.append(data);
-              selected_cat.find('.collapse').addClass('show');
-              selected_cat.find('.collapse').attr('id','top_sub_menu_'+random);
+                selected_cat.find('.collapse').append(data);
+                selected_cat.find('.collapse').addClass('show');
                 //Cleans the elements with depth=3 when inserted
                 if(depth == 2){
                     $("ul[data-depth='2']").find("ul[data-depth='3']").parent().addClass('hidden');
