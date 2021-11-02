@@ -12,7 +12,7 @@ var category;
 var request;
 var mobile = 0;
 var width = window.innerWidth;
-console.log(width);
+
 if(width < 768){
     mobile = 1;
 }
@@ -66,8 +66,8 @@ if(width < 768){
                 categories_displayed.push(id_category);
 
                 //Append to the end of the div
-                selected_cat.find('.collapse').append(data);
-                selected_cat.find('.collapse').addClass('show');
+                selected_cat.find('div:last-child').append(data);
+                selected_cat.find('div:last-child').addClass('show');
                 //Cleans the elements with depth=3 when inserted
                 if(depth == 2){
                     $("ul[data-depth='2']").find("ul[data-depth='3']").parent().addClass('hidden');
