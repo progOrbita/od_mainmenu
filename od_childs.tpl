@@ -63,5 +63,5 @@
 {/function}
 
 {*<div class="menu js-top-menu col">*}
-    {menu nodes=$menu.children depth=$base_depth}
+    {menu nodes=$menu.children.0.children depth=$base_depth}
 {*</div>*}

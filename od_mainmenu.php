@@ -1502,7 +1502,7 @@ class Od_MainMenu extends Module implements WidgetInterface
         ]);
         if (isset($configuration['id_category'])) {
             $this->smarty->assign([
-                'base_depth' => $configuration['depth']
+                'base_depth' => $configuration['depth']+1
             ]);
             return $this->fetch('module:od_mainmenu/od_childs.tpl');
         }
