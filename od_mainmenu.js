@@ -3,10 +3,6 @@
 
 /*import $ from 'jquery';*/
 
-$(function () {
-    // Ocultar todos los elementos en depth=3 (limpiar el submenu)
-    
-    $("ul[data-depth='2']").on('mouseover', ' li', function() {
 const categories_displayed = [1];
 var category;
 var request;
