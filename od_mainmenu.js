@@ -22,6 +22,7 @@ window.innerWidth > 767 ? mobile = 0 : mobile = 1;
         }
     }
 
+    //Refresh submenu in desktop
     $(document).on('mouseover', "ul[data-depth='2'] li", function() {
         if(!mobile){
             //Add an underline to the submenu selected
@@ -65,7 +66,7 @@ window.innerWidth > 767 ? mobile = 0 : mobile = 1;
                 ajax: true,id_category,depth,
             },
             success: function(data){
-                //empty, parents without childs.
+                //empty, parents without childs don't insert anything
                 if(data.replace(/\s/g,"") == ""){
                     return;
                 }
@@ -74,6 +75,7 @@ window.innerWidth > 767 ? mobile = 0 : mobile = 1;
                 mobile === 1 ? selected_cat.find('div:last-child').addClass('show') : selected_cat.find('.collapse').addClass('show');
 
                 selected_cat.find('div:last-child').append(data);
+
                 if(mobile){
                     childs = selected_cat.find('div > ul > li').length;
                     selected_cat.find('div:nth-child(2)').first().css('height',(childs*41)+'px');
@@ -89,6 +91,7 @@ window.innerWidth > 767 ? mobile = 0 : mobile = 1;
                 }
             }
         });
+        //refresh desktop menu when exiting
         $(document).on( 'mouseenter','#_desktop_header-menu', function(){
             $(this).find('.collapse .show').removeClass('show');
         });
