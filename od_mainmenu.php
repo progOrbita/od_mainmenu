@@ -1487,7 +1487,7 @@ class Od_MainMenu extends Module implements WidgetInterface
 
     public function renderWidget($hookName, array $configuration)
     {
-        $parents_query = Db::getInstance()->executeS('SELECT DISTINCT id_parent FROM `'._DB_PREFIX_.'category`');
+        $parents_query = Db::getInstance()->executeS('SELECT DISTINCT id_parent FROM `'._DB_PREFIX_.'category` WHERE active = 1');
         $parents = [];
         foreach ($parents_query as $key => $value) {
             $parents['category-'.$value['id_parent']] = 1;
