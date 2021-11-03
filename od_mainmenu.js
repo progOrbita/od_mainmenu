@@ -84,8 +84,9 @@ window.innerWidth > 768 ? mobile = 0 : mobile = 1;
                 }
             }
         });
+        $(document).on( 'mouseenter','#_desktop_header-menu', function(){
+            $(this).find('.collapse .show').removeClass('show');
+        });
     });
     //Close open tab when entering in the menu
-    $(document).on( 'mouseenter','#top-menu', function(){
-        $(this).find('.collapse .show').removeClass('show');
     });
