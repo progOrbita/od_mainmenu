@@ -7,10 +7,10 @@ const categories_displayed = [1];
 var category;
 var request;
 var mobile = 0;
-window.innerWidth > 768 ? mobile = 0 : mobile = 1;
+window.innerWidth > 767 ? mobile = 0 : mobile = 1;
 
     window.onresize = function(){
-        window.innerWidth > 768 ? mobile = 0 : mobile = 1;
+        window.innerWidth > 767 ? mobile = 0 : mobile = 1;
         if(!mobile){
             $('span.nav-link').removeClass('show');
             $('span.nav-link').addClass('hidden');
