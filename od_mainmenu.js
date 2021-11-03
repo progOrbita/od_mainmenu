@@ -44,6 +44,7 @@ window.innerWidth > 768 ? mobile = 0 : mobile = 1;
         if(!mobile){
             $('div.item-header[aria-expanded="true"]').attr('aria-expanded','false');
         }
+    function generateMenu(){
 
         let selected_cat = $(this);
         let id_category = parseInt(selected_cat.attr('id').match(/\d+/g)[0]);  
@@ -87,6 +88,15 @@ window.innerWidth > 768 ? mobile = 0 : mobile = 1;
         $(document).on( 'mouseenter','#_desktop_header-menu', function(){
             $(this).find('.collapse .show').removeClass('show');
         });
+    }
+    
+    $(document).on( 'mouseenter','.category', function(){
+        if(!mobile){
+            generateMenu.call(this);
+        }
     });
-    //Close open tab when entering in the menu
+    $(document).on( 'click','.category', function(){
+        if(mobile){
+            generateMenu.call(this);
+        }
     });
