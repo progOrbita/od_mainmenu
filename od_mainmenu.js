@@ -13,8 +13,17 @@ var request;
 var mobile = 0;
 window.innerWidth > 768 ? mobile = 0 : mobile = 1;
 
-function checkMobile(width){
-        width > 768 ? mobile = 0 : mobile = 1;
+    window.onresize = function(){
+        window.innerWidth > 768 ? mobile = 0 : mobile = 1;
+        if(!mobile){
+            $('span.nav-link').removeClass('show');
+            $('span.nav-link').addClass('hidden');
+            $('div.item-header[aria-expanded="true"]').attr('aria-expanded','false');
+        }
+        else{
+            $('span.nav-link').removeClass('hidden');
+            $('span.nav-link').addClass('show');
+        }
     }
 
     $(document).on('mouseover', "ul[data-depth='2'] li", function() {
