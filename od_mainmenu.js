@@ -40,10 +40,6 @@ window.innerWidth > 768 ? mobile = 0 : mobile = 1;
         }
         });
 
-    $(document).on( 'mouseenter','.category', function(){
-        if(!mobile){
-            $('div.item-header[aria-expanded="true"]').attr('aria-expanded','false');
-        }
     function generateMenu(){
 
         let selected_cat = $(this);
