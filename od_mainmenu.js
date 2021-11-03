@@ -72,8 +72,6 @@ window.innerWidth > 767 ? mobile = 0 : mobile = 1;
                 }
                 categories_displayed.push(id_category);
 
-                mobile === 1 ? selected_cat.find('div:last-child').addClass('show') : selected_cat.find('.collapse').addClass('show');
-
                 selected_cat.find('div:last-child').append(data);
 
                 if(mobile){
