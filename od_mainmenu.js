@@ -78,10 +78,14 @@ window.innerWidth > 768 ? mobile = 0 : mobile = 1;
                     childs = selected_cat.find('div > ul > li').length;
                     selected_cat.find('div:nth-child(2)').first().css('height',(childs*41)+'px');
                 }
-                //Cleans the elements with depth=3 when inserted
-                if(depth === 2){
-                    $("ul[data-depth='2']").find("ul[data-depth='3']").parent().addClass('hidden');
-                    $("ul[data-depth='2']").find("ul[data-depth='3']").parent().attr('aria-expanded', false);
+
+                if(!mobile){
+                    //Desktop, cleans the elements with depth=3 when inserted
+                    selected_cat.find('.collapse').addClass('show');
+                    if(depth === 2){
+                        $("ul[data-depth='2']").find("ul[data-depth='3']").parent().addClass('hidden');
+                        $("ul[data-depth='2']").find("ul[data-depth='3']").parent().attr('aria-expanded', false);
+                    }
                 }
             }
         });
