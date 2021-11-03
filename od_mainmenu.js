@@ -40,8 +40,7 @@ function checkMobile(width){
         checkMobile(window.innerWidth);
 
         let selected_cat = $(this);
-        let id_category = parseInt(selected_cat.attr('id').match(/\d+/g)[0]);
-                
+        let id_category = parseInt(selected_cat.attr('id').match(/\d+/g)[0]);  
         let depth = parseInt(selected_cat.find('.nav-link').data('depth'));
         
         if(categories_displayed.includes(id_category)){
