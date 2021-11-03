@@ -1486,20 +1486,20 @@ class Od_MainMenu extends Module implements WidgetInterface
 
     public function renderWidget($hookName, array $configuration)
     {
-        $parents_query = Db::getInstance()->executeS('SELECT DISTINCT id_parent FROM `'._DB_PREFIX_.'category` WHERE active = 1');
+        $parents_query = Db::getInstance()->executeS('SELECT DISTINCT id_parent FROM `' . _DB_PREFIX_ . 'category` WHERE active = 1');
         $parents = [];
-        foreach ($parents_query as $key => $value) {
-            $parents['category-'.$value['id_parent']] = 1;
+        //parents are category-id, to compare with the page identifier
+        foreach ($parents_query as $value) {
+            $parents['category-' . $value['id_parent']] = 1;
         }
 
-        //parents category-id are parents
         $this->smarty->assign([
             'menu' => $this->getWidgetVariables($hookName, $configuration),
             'parents' => $parents
         ]);
         if (isset($configuration['id_category'])) {
             $this->smarty->assign([
-                'base_depth' => $configuration['depth']+1
+                'base_depth' => $configuration['depth'] + 1
             ]);
             return $this->fetch('module:od_mainmenu/od_childs.tpl');
         }
