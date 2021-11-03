@@ -47,7 +47,7 @@ function checkMobile(width){
         if(categories_displayed.includes(id_category)){
             return;
         }
-
+        //Avoid calls for fast mouse movements
         if(category == id_category){
             return;
         }
@@ -56,6 +56,7 @@ function checkMobile(width){
         if(request){
             request.abort();
         }
+
         request = $.ajax({
             url: prestashop.modules.od_mainmenu.endpoint,
             data: {
