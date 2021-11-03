@@ -38,12 +38,12 @@ window.innerWidth > 768 ? mobile = 0 : mobile = 1;
                 $(this).find("ul[data-depth='3']").parent().attr('aria-expanded', true);
             }
         }
-        });
+    });
 
     function generateMenu(){
 
         let selected_cat = $(this);
-        let id_category = parseInt(selected_cat.attr('id').match(/\d+/g)[0]);  
+        let id_category = parseInt(selected_cat.attr('id').match(/\d+/g)[0]);
         let depth = parseInt(selected_cat.find('.nav-link').data('depth'));
         
         if(categories_displayed.includes(id_category)){
