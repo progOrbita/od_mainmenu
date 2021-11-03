@@ -11,14 +11,13 @@ const categories_displayed = [1];
 var category;
 var request;
 var mobile = 0;
+window.innerWidth > 768 ? mobile = 0 : mobile = 1;
 
 function checkMobile(width){
         width > 768 ? mobile = 0 : mobile = 1;
     }
 
-
     $(document).on('mouseover', "ul[data-depth='2'] li", function() {
-        checkMobile(window.innerWidth);
         if(!mobile){
             //Add an underline to the submenu selected
             $('#top-menu').find('.underline').removeClass('underline');
@@ -37,7 +36,9 @@ function checkMobile(width){
         });
 
     $(document).on( 'mouseenter','.category', function(){
-        checkMobile(window.innerWidth);
+        if(!mobile){
+            $('div.item-header[aria-expanded="true"]').attr('aria-expanded','false');
+        }
 
         let selected_cat = $(this);
         let id_category = parseInt(selected_cat.attr('id').match(/\d+/g)[0]);  
