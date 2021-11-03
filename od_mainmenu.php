@@ -1493,7 +1493,7 @@ class Od_MainMenu extends Module implements WidgetInterface
             $parents['category-'.$value['id_parent']] = 1;
         }
 
-        //parents list of names of the categories that are parents
+        //parents category-id are parents
         $this->smarty->assign([
             'menu' => $this->getWidgetVariables($hookName, $configuration),
             'parents' => $parents

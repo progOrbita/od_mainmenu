@@ -11,13 +11,14 @@ const categories_displayed = [1];
 var category;
 var request;
 var mobile = 0;
-var width = window.innerWidth;
 
-if(width < 768){
-    mobile = 1;
-}
     
         $(document).on('mouseover', "ul[data-depth='2'] li", function() {
+function checkMobile(width){
+        width > 768 ? mobile = 0 : mobile = 1;
+    }
+
+
             //Add an underline to the submenu selected
             $('#top-menu').find('.underline').removeClass('underline');
             $(this).find('.item-header > a[data-depth="2"]').addClass('underline');
