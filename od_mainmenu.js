@@ -12,7 +12,6 @@ var category;
 var request;
 var mobile = 0;
 
-    
 function checkMobile(width){
         width > 768 ? mobile = 0 : mobile = 1;
     }
@@ -38,6 +37,8 @@ function checkMobile(width){
         });
 
     $(document).on( 'mouseenter','.category', function(){
+        checkMobile(window.innerWidth);
+
         let selected_cat = $(this);
         let id_category = parseInt(selected_cat.attr('id').match(/\d+/g)[0]);
                 
@@ -67,14 +68,9 @@ function checkMobile(width){
                 }
                 categories_displayed.push(id_category);
 
-                //Append to the end of the div
+                mobile === 1 ? selected_cat.find('div:last-child').addClass('show') : selected_cat.find('.collapse').addClass('show');
+
                 selected_cat.find('div:last-child').append(data);
-                if(mobile){
-                    selected_cat.find('div:last-child').addClass('show');
-                }
-                else{
-                    selected_cat.find('.collapse').addClass('show');
-                }
                 //Cleans the elements with depth=3 when inserted
                 if(depth == 2){
                     $("ul[data-depth='2']").find("ul[data-depth='3']").parent().addClass('hidden');
