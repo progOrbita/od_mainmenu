@@ -74,6 +74,10 @@ window.innerWidth > 768 ? mobile = 0 : mobile = 1;
                 mobile === 1 ? selected_cat.find('div:last-child').addClass('show') : selected_cat.find('.collapse').addClass('show');
 
                 selected_cat.find('div:last-child').append(data);
+                if(mobile){
+                    childs = selected_cat.find('div > ul > li').length;
+                    selected_cat.find('div:nth-child(2)').first().css('height',(childs*41)+'px');
+                }
                 //Cleans the elements with depth=3 when inserted
                 if(depth === 2){
                     $("ul[data-depth='2']").find("ul[data-depth='3']").parent().addClass('hidden');
