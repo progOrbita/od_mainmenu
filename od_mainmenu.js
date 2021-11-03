@@ -13,26 +13,28 @@ var request;
 var mobile = 0;
 
     
-        $(document).on('mouseover', "ul[data-depth='2'] li", function() {
 function checkMobile(width){
         width > 768 ? mobile = 0 : mobile = 1;
     }
 
 
+    $(document).on('mouseover', "ul[data-depth='2'] li", function() {
+        checkMobile(window.innerWidth);
+        if(!mobile){
             //Add an underline to the submenu selected
             $('#top-menu').find('.underline').removeClass('underline');
             $(this).find('.item-header > a[data-depth="2"]').addClass('underline');
-            if(!mobile){
-                // Hide all the elements in depth=3 (cleans the submenu)
-                $("ul[data-depth='2']").find("ul[data-depth='3']").parent().removeClass('show');
-                $("ul[data-depth='2']").find("ul[data-depth='3']").parent().addClass('hidden');
-                $("ul[data-depth='2']").find("ul[data-depth='3']").parent().attr('aria-expanded', false);
-                // Shows only the children of the element where we stood
-                if(this.children[1]) {
-                    $(this).find("ul[data-depth='3']").parent().removeClass('hidden');
-                    $(this).find("ul[data-depth='3']").parent().attr('aria-expanded', true);
-                }
+
+            // Hide all the elements in depth=3 (cleans the submenu)
+            $("ul[data-depth='2']").find("ul[data-depth='3']").parent().removeClass('show');
+            $("ul[data-depth='2']").find("ul[data-depth='3']").parent().addClass('hidden');
+            $("ul[data-depth='2']").find("ul[data-depth='3']").parent().attr('aria-expanded', false);
+            // Shows only the children of the element where we stood
+            if(this.children[1]) {
+                $(this).find("ul[data-depth='3']").parent().removeClass('hidden');
+                $(this).find("ul[data-depth='3']").parent().attr('aria-expanded', true);
             }
+        }
         });
 
     $(document).on( 'mouseenter','.category', function(){
