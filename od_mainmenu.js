@@ -66,7 +66,12 @@ if(width < 768){
 
                 //Append to the end of the div
                 selected_cat.find('div:last-child').append(data);
-                selected_cat.find('div:last-child').addClass('show');
+                if(mobile){
+                    selected_cat.find('div:last-child').addClass('show');
+                }
+                else{
+                    selected_cat.find('.collapse').addClass('show');
+                }
                 //Cleans the elements with depth=3 when inserted
                 if(depth == 2){
                     $("ul[data-depth='2']").find("ul[data-depth='3']").parent().addClass('hidden');
