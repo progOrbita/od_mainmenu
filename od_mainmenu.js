@@ -12,11 +12,13 @@ window.innerWidth > 767 ? mobile = 0 : mobile = 1;
     window.onresize = function(){
         window.innerWidth > 767 ? mobile = 0 : mobile = 1;
         if(!mobile){
+            //Remove arrows in desktop version
             $('span.nav-link').removeClass('show');
             $('span.nav-link').addClass('hidden');
             $('div.item-header[aria-expanded="true"]').attr('aria-expanded','false');
         }
         else{
+            //Add arrows and clean subcategories opened in desktop version
             $('span.nav-link').removeClass('hidden');
             $('span.nav-link').addClass('show');
             $('div[data-toggle="collapse"]').addClass('collapsed');
@@ -93,9 +95,8 @@ window.innerWidth > 767 ? mobile = 0 : mobile = 1;
             }
         });
     }
-    //refresh desktop menu when exiting
+    //refresh desktop menu when re-entering
     $(document).on( 'mouseenter','#_desktop_header-menu', function(){
-        //Desktop, cleans the sub-categories for mobile to desktop version
         $(this).find('.collapse .show').removeClass('show');
     });
     
@@ -106,6 +107,7 @@ window.innerWidth > 767 ? mobile = 0 : mobile = 1;
     });
     $(document).on( 'click','.category', function(){
         if(mobile){
+            //refresh mobile menu styles
             $('#_mobile_header-menu').find('.underline').removeClass('underline');
             $(this).find('.hidden').removeClass('hidden');
             generateMenu.call(this);
