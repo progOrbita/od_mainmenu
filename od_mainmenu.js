@@ -53,6 +53,10 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
         let depth = parseInt(selected_cat.find('.nav-link').data('depth'));
         
         if(categories_displayed.includes(id_category)){
+            if(request && !is_mobile){  
+                request.abort();
+                category = id_category;
+            }
             return;
         }
         //Avoid calls for fast mouse movements in desktop
@@ -98,11 +102,6 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
     
     $(document).on( 'mouseenter','.category', function(){
         if(!is_mobile){
-            //Avoid overlapping submenu elements
-            if(request){
-                request.abort();
-                category = 0;
-            }
             generateMenu.call(this);
         }
     });
