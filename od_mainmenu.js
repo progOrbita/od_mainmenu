@@ -89,11 +89,12 @@ window.innerWidth > 767 ? mobile = 0 : mobile = 1;
                 }
             }
         });
-        //refresh desktop menu when exiting
-        $(document).on( 'mouseenter','#_desktop_header-menu', function(){
-            $(this).find('.collapse .show').removeClass('show');
-        });
     }
+    //refresh desktop menu when exiting
+    $(document).on( 'mouseenter','#_desktop_header-menu', function(){
+        //Desktop, cleans the sub-categories for mobile to desktop version
+        $(this).find('.collapse .show').removeClass('show');
+    });
     
     $(document).on( 'mouseenter','.category', function(){
         if(!mobile){
