@@ -61,10 +61,6 @@ window.innerWidth > 767 ? mobile = 0 : mobile = 1;
         }
         category = id_category;
 
-        if(request){
-            request.abort();
-        }
-
         request = $.ajax({
             url: prestashop.modules.od_mainmenu.endpoint,
             data: {
