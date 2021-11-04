@@ -6,12 +6,12 @@
 const categories_displayed = [1];
 var category;
 var request;
-var mobile = 0;
-window.innerWidth > 767 ? mobile = 0 : mobile = 1;
+
+window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
 
     window.onresize = function(){
-        window.innerWidth > 767 ? mobile = 0 : mobile = 1;
-        if(!mobile){
+        window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
+        if(!is_mobile){
             //Remove arrows in desktop version
             $('span.nav-link').removeClass('show');
             $('span.nav-link').addClass('hidden');
@@ -29,7 +29,7 @@ window.innerWidth > 767 ? mobile = 0 : mobile = 1;
 
     //Refresh submenu in desktop
     $(document).on('mouseover', "ul[data-depth='2'] li", function() {
-        if(!mobile){
+        if(!is_mobile){
             //Add an underline to the submenu selected
             $('#top-menu').find('.underline').removeClass('underline');
             $(this).find('.item-header > a[data-depth="2"]').addClass('underline');
@@ -55,7 +55,7 @@ window.innerWidth > 767 ? mobile = 0 : mobile = 1;
         if(categories_displayed.includes(id_category)){
             return;
         }
-        //Avoid calls for fast mouse movements
+        //Avoid calls for fast mouse movements in desktop
         if(category == id_category){
             return;
         }
@@ -74,13 +74,13 @@ window.innerWidth > 767 ? mobile = 0 : mobile = 1;
                 categories_displayed.push(id_category);
 
                 selected_cat.find('div:last-child').append(data);
-
-                if(mobile){
+                //Mobile smooth animation requires an height based on number of childs
+                if(is_mobile){
                     childs = selected_cat.find('div > ul > li').length;
                     selected_cat.find('div:nth-child(2)').first().css('height',(childs*41)+'px');
                 }
 
-                if(!mobile){
+                if(!is_mobile){
                     //Desktop, cleans the elements with depth=3 when inserted
                     selected_cat.find('.collapse').addClass('show');
                     if(depth === 2){
@@ -97,17 +97,17 @@ window.innerWidth > 767 ? mobile = 0 : mobile = 1;
     });
     
     $(document).on( 'mouseenter','.category', function(){
-        if(!mobile){
+        if(!is_mobile){
+            //Avoid overlapping submenu elements
             if(request){
                 request.abort();
                 category = 0;
             }
-            
             generateMenu.call(this);
         }
     });
     $(document).on( 'click','.category', function(){
-        if(mobile){
+        if(is_mobile){
             //refresh mobile menu styles
             $('#_mobile_header-menu').find('.underline').removeClass('underline');
             $(this).find('.hidden').removeClass('hidden');
