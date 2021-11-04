@@ -63,6 +63,9 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
         if(category == id_category){
             return;
         }
+        if(request && !is_mobile){
+            request.abort();
+        }
         category = id_category;
 
         request = $.ajax({
