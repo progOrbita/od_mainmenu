@@ -72,10 +72,10 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
             },
             success: function(data){
                 //empty, parents without childs don't insert anything
+                categories_displayed.push(id_category);
                 if(data.replace(/\s/g,"") == ""){
                     return;
                 }
-                categories_displayed.push(id_category);
 
                 selected_cat.find('div:last-child').append(data);
                 //Mobile smooth animation requires an height based on number of childs
