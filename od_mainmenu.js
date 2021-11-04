@@ -82,9 +82,6 @@ window.innerWidth > 767 ? mobile = 0 : mobile = 1;
 
                 if(!mobile){
                     //Desktop, cleans the elements with depth=3 when inserted
-                    if(depth === 1){
-                        selected_cat.closest('ul[data-depth=1]').find('.show').removeClass('show');
-                    }
                     selected_cat.find('.collapse').addClass('show');
                     if(depth === 2){
                         $("ul[data-depth='2']").find("ul[data-depth='3']").parent().addClass('hidden');
