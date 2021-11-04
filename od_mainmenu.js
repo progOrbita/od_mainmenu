@@ -19,6 +19,9 @@ window.innerWidth > 767 ? mobile = 0 : mobile = 1;
         else{
             $('span.nav-link').removeClass('hidden');
             $('span.nav-link').addClass('show');
+            $('div[data-toggle="collapse"]').addClass('collapsed');
+            $("ul[data-depth='2']").find("ul[data-depth='3']").parent().addClass('hidden');
+            $("ul[data-depth='2']").find("ul[data-depth='3']").parent().attr('aria-expanded', false);
         }
     }
 
