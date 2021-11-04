@@ -103,6 +103,8 @@ window.innerWidth > 767 ? mobile = 0 : mobile = 1;
     });
     $(document).on( 'click','.category', function(){
         if(mobile){
+            $('#_mobile_header-menu').find('.underline').removeClass('underline');
+            $(this).find('.hidden').removeClass('hidden');
             generateMenu.call(this);
         }
     });
