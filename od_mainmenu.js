@@ -55,7 +55,6 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
         if(categories_displayed.includes(id_category)){
             if(request && !is_mobile){  
                 request.abort();
-                category = id_category;
             }
             return;
         }
@@ -66,7 +65,9 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
         if(request && !is_mobile){
             request.abort();
         }
-        category = id_category;
+        if(is_mobile){
+            category = id_category;
+        }
 
         request = $.ajax({
             url: prestashop.modules.od_mainmenu.endpoint,
@@ -74,6 +75,9 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
                 ajax: true,id_category,depth,
             },
             success: function(data){
+                if(!is_mobile){
+                    category = id_category;
+                }
                 //empty, parents without childs don't insert anything
                 categories_displayed.push(id_category);
                 if(data.replace(/\s/g,"") == ""){
