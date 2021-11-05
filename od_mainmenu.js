@@ -12,13 +12,13 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
     window.onresize = function(){
         window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
         if(!is_mobile){
-            //Remove arrows in desktop version
+            //Desktop, remove arrows
             $('span.nav-link').removeClass('show');
             $('span.nav-link').addClass('hidden');
             $('div.item-header[aria-expanded="true"]').attr('aria-expanded','false');
         }
         else{
-            //Add arrows and clean subcategories opened in desktop version
+            //Mobile, add arrows and removes subcategories opened
             $('span.nav-link').removeClass('hidden');
             $('span.nav-link').addClass('show');
             $('div[data-toggle="collapse"]').addClass('collapsed');
@@ -58,7 +58,7 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
             }
             return;
         }
-        //Avoid calls for fast mouse movements in desktop
+        //Avoid calls for fast clicks
         if(category == id_category){
             return;
         }
