@@ -50,7 +50,7 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
 
         let selected_cat = $(this);
         let id_category = parseInt(selected_cat.attr('id').match(/\d+/g)[0]);
-        let depth = parseInt(selected_cat.find('.nav-link').data('depth'));
+        let category_depth = parseInt(selected_cat.find('.nav-link').data('depth'));
         
         if(categories_displayed.includes(id_category)){
             if(request && !is_mobile){  
@@ -72,7 +72,7 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
         request = $.ajax({
             url: prestashop.modules.od_mainmenu.endpoint,
             data: {
-                ajax: true,id_category,depth,
+                ajax: true,id_category,category_depth,
             },
             success: function(data){
                 if(!is_mobile){
@@ -94,7 +94,7 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
                 if(!is_mobile){
                     //Desktop, cleans the elements with depth=3 when inserted
                     selected_cat.find('.collapse').addClass('show');
-                    if(depth === 2){
+                    if(category_depth === 2){
                         $("ul[data-depth='2']").find("ul[data-depth='3']").parent().addClass('hidden');
                         $("ul[data-depth='2']").find("ul[data-depth='3']").parent().attr('aria-expanded', false);
                     }
