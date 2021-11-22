@@ -64,6 +64,9 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
             return;
         }
         if(request && !is_mobile){
+            if(category_depth === 2){
+                selected_cat.find('.item-header > a[data-depth="2"]').removeClass('underline');
+            }
             request.abort();
         }
         if(is_mobile){
@@ -98,6 +101,7 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
                     //Desktop, cleans the elements with depth=3 when inserted
                     selected_cat.find('.collapse').addClass('show');
                     if(category_depth === 2){
+                        selected_cat.find('.item-header > a[data-depth="2"]').addClass('underline');
                         $("ul[data-depth='2']").find("ul[data-depth='3']").parent().addClass('hidden');
                         $("ul[data-depth='2']").find("ul[data-depth='3']").parent().attr('aria-expanded', false);
                     }
