@@ -4,6 +4,7 @@
 /*import $ from 'jquery';*/
 
 const categories_displayed = [];
+const index = $(document).find('#category-1');
 var category;
 var request;
 
@@ -45,12 +46,20 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
             }
         }
     });
+    /**
+     * Obtains the id of the category from the DOM element
+     * @param {Object} element 
+     * @returns id of category id
+     */
+    function getCategoryId(element){
+        return parseInt(element.attr('id').match(/\d+/g)[0]);
+    }
 
     function generateMenu(index){
         let selected_cat;
         index ? selected_cat = index : selected_cat = $(this);
 
-        let id_category = parseInt(selected_cat.attr('id').match(/\d+/g)[0]);
+        let id_category = getCategoryId(selected_cat);
         let category_depth = parseInt(selected_cat.find('.nav-link').data('depth'));
         
         if(categories_displayed.includes(id_category)){
@@ -140,15 +149,13 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
             $(this).find('div:nth-child(2)').first().removeClass('show');
         }
         //avoid menu generation if exit the tab
-        let index = $(document).find('#category-1');
-        let id_root = parseInt(index.attr('id').match(/\d+/g)[0]);
+        let id_root = getCategoryId(index);
         if(!categories_displayed.includes(id_root)){
             request.abort();
         }
     });
     //generate menu for mobile version
     $(document).on( 'click','.menu-icon', function(){
-        let index = $(document).find('#category-1');
         generateMenu(index);
     });
     $(document).on( 'click','.category', function(){
