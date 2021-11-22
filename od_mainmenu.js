@@ -133,6 +133,12 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
             $(this).find('div:nth-child(1)').first().addClass('collapsed');
             $(this).find('div:nth-child(2)').first().removeClass('show');
         }
+        //avoid showing menu
+        let index = $(document).find('#category-1');
+        let id_root = parseInt(index.attr('id').match(/\d+/g)[0]);
+        if(!categories_displayed.includes(id_root)){
+            request.abort();
+        }
     });
     //generate menu for mobile version
     $(document).on( 'click','.menu-icon', function(){
