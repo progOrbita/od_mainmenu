@@ -46,9 +46,10 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
         }
     });
 
-    function generateMenu(){
+    function generateMenu(index){
+        //True only if is clicked menu icon on mobile
+        index ? selected_cat = index : selected_cat = $(this);
 
-        let selected_cat = $(this);
         let id_category = parseInt(selected_cat.attr('id').match(/\d+/g)[0]);
         let category_depth = parseInt(selected_cat.find('.nav-link').data('depth'));
         
@@ -111,6 +112,11 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
         if(!is_mobile){
             generateMenu.call(this);
         }
+    });
+    //generate menu for mobile version
+    $(document).on( 'click','.menu-icon', function(){
+        let index = $(document).find('#category-1');
+        generateMenu(index);
     });
     $(document).on( 'click','.category', function(){
         if(is_mobile){
