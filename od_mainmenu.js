@@ -112,6 +112,9 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
     $(document).on( 'mouseenter','#_desktop_header-menu', function(){
         $(this).find('.collapse .show').removeClass('show');
     });
+    $(document).on( 'mouseleave','#_desktop_header-menu', function(){
+        $(this).find('div[aria-expanded="true"]').attr('aria-expanded',false);
+    });
     
     $(document).on( 'mouseenter','.category', function(){
         if(!is_mobile){
@@ -120,6 +123,7 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
             //classes for 'home' tab childs, theme doesnt work because is inserted when DOM is already up.
             if(selected_depth === 1){
                 $(this).find('div:nth-child(1)').first().removeClass('collapsed');
+                $(this).find('div:nth-child(1)').attr('aria-expanded',true);
                 $(this).find('div:nth-child(2)').first().addClass('show');
                 //Remove underline if the sub-menu is hidden
                 if($(this).find('.underline').parent().next().hasClass('hidden')){
@@ -132,6 +136,7 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
         let selected_depth = parseInt($(this).find('.nav-link').data('depth'));
         if(!is_mobile && selected_depth === 1){
             $(this).find('div:nth-child(1)').first().addClass('collapsed');
+            $(this).find('div:nth-child(1)').attr('aria-expanded',false);
             $(this).find('div:nth-child(2)').first().removeClass('show');
         }
         //avoid menu generation if exit the tab
