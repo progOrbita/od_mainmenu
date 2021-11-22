@@ -47,7 +47,7 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
     });
 
     function generateMenu(index){
-        //True only if is clicked menu icon on mobile
+        let selected_cat;
         index ? selected_cat = index : selected_cat = $(this);
 
         let id_category = parseInt(selected_cat.attr('id').match(/\d+/g)[0]);
@@ -89,7 +89,9 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
                 //Mobile smooth animation requires an height based on number of childs
                 if(is_mobile){
                     childs = selected_cat.find('div > ul > li').length;
-                    selected_cat.find('div:nth-child(2)').first().css('height',(childs*41)+'px');
+                    if(category_depth !== 0){
+                        selected_cat.find('div:nth-child(2)').first().css('height',(childs*41)+'px');
+                    }
                 }
 
                 if(!is_mobile){
