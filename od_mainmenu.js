@@ -117,9 +117,11 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
         if(!is_mobile){
             generateMenu.call(this);
             let selected_depth = parseInt($(this).find('.nav-link').data('depth'));
+            //classes for 'home' tab childs, theme doesnt work because is inserted when DOM is already up.
             if(selected_depth === 1){
                 $(this).find('div:nth-child(1)').first().removeClass('collapsed');
                 $(this).find('div:nth-child(2)').first().addClass('show');
+                //Remove underline if the sub-menu is hidden
                 if($(this).find('.underline').parent().next().hasClass('hidden')){
                     $('#top-menu').find('.underline').removeClass('underline'); 
                 }
@@ -132,7 +134,7 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
             $(this).find('div:nth-child(1)').first().addClass('collapsed');
             $(this).find('div:nth-child(2)').first().removeClass('show');
         }
-        //avoid showing menu
+        //avoid menu generation if exit the tab
         let index = $(document).find('#category-1');
         let id_root = parseInt(index.attr('id').match(/\d+/g)[0]);
         if(!categories_displayed.includes(id_root)){
