@@ -3,7 +3,7 @@
 
 /*import $ from 'jquery';*/
 
-const categories_displayed = [1];
+const categories_displayed = [];
 var category;
 var request;
 

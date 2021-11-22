@@ -54,7 +54,6 @@
   
           {if $_isparent[{$node.page_identifier}]}
             <div class="{if $depth === 0}popover {/if}collapse" id="top_sub_menu_{$_expand_id}">
-              {menu nodes=$node.children depth=$node.depth parent=$node}
             </div>
           {/if}
         </li>
