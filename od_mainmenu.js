@@ -121,6 +121,9 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
             if(selected_depth === 1){
                 $(this).find('div:nth-child(1)').first().removeClass('collapsed');
                 $(this).find('div:nth-child(2)').first().addClass('show');
+                if($(this).find('.underline').parent().next().hasClass('hidden')){
+                    $('#top-menu').find('.underline').removeClass('underline'); 
+                }
             }
         }
     });
