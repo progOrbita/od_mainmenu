@@ -111,6 +111,18 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
     $(document).on( 'mouseenter','.category', function(){
         if(!is_mobile){
             generateMenu.call(this);
+            let selected_depth = parseInt($(this).find('.nav-link').data('depth'));
+            if(selected_depth === 1){
+                $(this).find('div:nth-child(1)').first().removeClass('collapsed');
+                $(this).find('div:nth-child(2)').first().addClass('show');
+            }
+        }
+    });
+    $(document).on( 'mouseleave','.category', function(){
+        let selected_depth = parseInt($(this).find('.nav-link').data('depth'));
+        if(!is_mobile && selected_depth === 1){
+            $(this).find('div:nth-child(1)').first().addClass('collapsed');
+            $(this).find('div:nth-child(2)').first().removeClass('show');
         }
     });
     //generate menu for mobile version
