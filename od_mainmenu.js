@@ -107,7 +107,6 @@ function refreshSubmenu(){
                     //Desktop, hide arrows and reset height from submenus
                     $('span.nav-link').removeClass('show');
                     $('span.nav-link').addClass('hidden');
-                    $('div.item-header[aria-expanded="true"]').attr('aria-expanded','false');
                 }
             }
         });
