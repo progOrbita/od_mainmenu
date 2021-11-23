@@ -103,6 +103,12 @@ function refreshSubmenu(){
                         selected_cat.find('div:nth-child(2)').first().css('height',(childs*41)+'px');
                     }
                 }
+                if(is_mobile === 0){
+                    //Desktop, hide arrows and reset height from submenus
+                    $('span.nav-link').removeClass('show');
+                    $('span.nav-link').addClass('hidden');
+                    $('div.item-header[aria-expanded="true"]').attr('aria-expanded','false');
+                }
             }
         });
     }
