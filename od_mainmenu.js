@@ -19,6 +19,12 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
 function getCategoryId(element){
     return parseInt(element.attr('id').match(/\d+/g)[0]);
 }
+
+/**
+* Refresh submenu by removing the underline and hide the submenus opened
+* @returns void
+*/
+
 function refreshSubmenu(){
     $('#top-menu').find('.underline').removeClass('underline');
     // Hide all the elements in depth=3 (cleans the submenu)
@@ -26,10 +32,11 @@ function refreshSubmenu(){
     $("ul[data-depth='2']").find("ul[data-depth='3']").parent().addClass('hidden');
     $("ul[data-depth='2']").find("ul[data-depth='3']").parent().attr('aria-expanded', false);
 }
+
     window.onresize = function(){
         window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
         if(!is_mobile){
-            //Desktop, remove arrows
+            //Desktop, hide arrows and reset height from submenus
             $('span.nav-link').removeClass('show');
             $('span.nav-link').addClass('hidden');
             $('div.item-header[aria-expanded="true"]').attr('aria-expanded','false');
@@ -39,7 +46,7 @@ function refreshSubmenu(){
 
         }
         else{
-            //Mobile, add arrows and removes subcategories opened
+            //Mobile, show arrows and removes subcategories opened
             $('span.nav-link').removeClass('hidden');
             $('span.nav-link').addClass('show');
             $('div[data-toggle="collapse"]').addClass('collapsed');
@@ -50,7 +57,7 @@ function refreshSubmenu(){
     
     /**
      * Obtain and append the childs to the category selected
-     * @param {int} index Root category id
+     * @param {int} index li DOM element of root category
      * @returns void
      */
     function generateMenu(index){
@@ -103,6 +110,8 @@ function refreshSubmenu(){
             }
         });
     }
+
+    //Refresh submenu in desktop
     $(document).on('mouseover', "ul[data-depth='2'] li", function() {
         if(!is_mobile){
             refreshSubmenu();
@@ -119,6 +128,7 @@ function refreshSubmenu(){
         request.abort();
         refreshSubmenu();
     });
+    
     //refresh desktop menu when re-entering
     $(document).on( 'mouseenter','#_desktop_header-menu', function(){
         $(this).find('.collapse .show').removeClass('show');
