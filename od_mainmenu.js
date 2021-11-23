@@ -17,6 +17,10 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
             $('span.nav-link').removeClass('show');
             $('span.nav-link').addClass('hidden');
             $('div.item-header[aria-expanded="true"]').attr('aria-expanded','false');
+            if($('#top-menu').find('div').css('height') != null){
+                $('#top-menu').find('div').css('height','');
+            }
+
         }
         else{
             //Mobile, add arrows and removes subcategories opened
