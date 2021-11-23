@@ -40,10 +40,6 @@ function refreshSubmenu(){
             $('span.nav-link').removeClass('show');
             $('span.nav-link').addClass('hidden');
             $('div.item-header[aria-expanded="true"]').attr('aria-expanded','false');
-            if($('#top-menu').find('div').css('height') != null){
-                $('#top-menu').find('div').css('height','');
-            }
-
         }
         else{
             //Mobile, show arrows and removes subcategories opened
@@ -125,8 +121,10 @@ function refreshSubmenu(){
         }
     });
     $(document).on('mouseleave', "div.collapse .show", function() {
-        request.abort();
-        refreshSubmenu();
+        if(!is_mobile){
+            request.abort();
+            refreshSubmenu();
+        }
     });
     
     //refresh desktop menu when re-entering
@@ -146,6 +144,11 @@ function refreshSubmenu(){
                 $(this).find('div:nth-child(1)').first().removeClass('collapsed');
                 $(this).find('div:nth-child(1)').attr('aria-expanded',true);
                 $(this).find('div:nth-child(2)').first().addClass('show');
+            }
+        }
+        if(is_mobile){
+            if($('#top-menu').find('div').css('height') != null){
+                $('#top-menu').find('div').css('height','');
             }
         }
     });
