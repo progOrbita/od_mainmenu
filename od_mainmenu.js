@@ -54,7 +54,11 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
     function getCategoryId(element){
         return parseInt(element.attr('id').match(/\d+/g)[0]);
     }
-
+    /**
+     * Obtain and append the childs to the category selected
+     * @param {int} index Root category id
+     * @returns void
+     */
     function generateMenu(index){
         let selected_cat;
         index ? selected_cat = index : selected_cat = $(this);
