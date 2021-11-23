@@ -10,6 +10,15 @@ var request;
 
 window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
 
+/**
+* Obtains the id of the category from the DOM element
+* @param {Object} element 
+* @returns id of category id
+*/
+
+function getCategoryId(element){
+    return parseInt(element.attr('id').match(/\d+/g)[0]);
+}
 function refreshSubmenu(){
     $('#top-menu').find('.underline').removeClass('underline');
     // Hide all the elements in depth=3 (cleans the submenu)
@@ -38,14 +47,7 @@ function refreshSubmenu(){
             $("ul[data-depth='2']").find("ul[data-depth='3']").parent().attr('aria-expanded', false);
         }
     }
-    /**
-     * Obtains the id of the category from the DOM element
-     * @param {Object} element 
-     * @returns id of category id
-     */
-    function getCategoryId(element){
-        return parseInt(element.attr('id').match(/\d+/g)[0]);
-    }
+    
     /**
      * Obtain and append the childs to the category selected
      * @param {int} index Root category id
