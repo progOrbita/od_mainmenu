@@ -94,6 +94,7 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
                 //empty, parents without childs don't insert anything
                 categories_displayed.push(id_category);
                 if(data.replace(/\s/g,"") == ""){
+                    selected_cat.find('.item-header > a[data-depth="2"]').addClass('underline');
                     return;
                 }
 
