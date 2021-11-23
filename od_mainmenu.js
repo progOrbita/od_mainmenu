@@ -37,8 +37,7 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
         if(!is_mobile){
             //Add an underline to the submenu selected
             $('#top-menu').find('.underline').removeClass('underline');
-            $(this).find('.item-header > a[data-depth="2"]').addClass('underline');
-
+            $(this).find('.item-header > a[data-depth="2"]').toggleClass('underline');
             // Hide all the elements in depth=3 (cleans the submenu)
             $("ul[data-depth='2']").find("ul[data-depth='3']").parent().removeClass('show');
             $("ul[data-depth='2']").find("ul[data-depth='3']").parent().addClass('hidden');
@@ -49,6 +48,13 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
                 $(this).find("ul[data-depth='3']").parent().attr('aria-expanded', true);
             }
         }
+    });
+    $(document).on('mouseleave', "div.collapse .show", function() {
+        request.abort();
+        $('#top-menu').find('.underline').removeClass('underline');
+        $("ul[data-depth='2']").find("ul[data-depth='3']").parent().removeClass('show');
+        $("ul[data-depth='2']").find("ul[data-depth='3']").parent().addClass('hidden');
+        $("ul[data-depth='2']").find("ul[data-depth='3']").parent().attr('aria-expanded', false);
     });
     /**
      * Obtains the id of the category from the DOM element
@@ -81,9 +87,6 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
             return;
         }
         if(request && !is_mobile){
-            if(category_depth === 2){
-                selected_cat.find('.item-header > a[data-depth="2"]').removeClass('underline');
-            }
             request.abort();
         }
         if(is_mobile){
@@ -102,7 +105,6 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
                 //empty, parents without childs don't insert anything
                 categories_displayed.push(id_category);
                 if(data.replace(/\s/g,"") == ""){
-                    selected_cat.find('.item-header > a[data-depth="2"]').addClass('underline');
                     return;
                 }
 
@@ -118,7 +120,7 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
                 if(!is_mobile){
                     //Desktop, cleans the elements with depth=3 when inserted
                     if(category_depth === 2){
-                        selected_cat.find('.item-header > a[data-depth="2"]').addClass('underline');
+
                         //$("ul[data-depth='2']").find("ul[data-depth='3']").parent().addClass('hidden');
                         //$("ul[data-depth='2']").find("ul[data-depth='3']").parent().attr('aria-expanded', false);
                     }
@@ -143,10 +145,6 @@ window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
                 $(this).find('div:nth-child(1)').first().removeClass('collapsed');
                 $(this).find('div:nth-child(1)').attr('aria-expanded',true);
                 $(this).find('div:nth-child(2)').first().addClass('show');
-                //Remove underline if the sub-menu is hidden
-                if($(this).find('.underline').parent().next().hasClass('hidden')){
-                    $('#top-menu').find('.underline').removeClass('underline'); 
-                }
             }
         }
     });
