@@ -100,15 +100,6 @@ function refreshSubmenu(){
                         selected_cat.find('div:nth-child(2)').first().css('height',(childs*41)+'px');
                     }
                 }
-
-                if(!is_mobile){
-                    //Desktop, cleans the elements with depth=3 when inserted
-                    if(category_depth === 2){
-
-                        //$("ul[data-depth='2']").find("ul[data-depth='3']").parent().addClass('hidden');
-                        //$("ul[data-depth='2']").find("ul[data-depth='3']").parent().attr('aria-expanded', false);
-                    }
-                }
             }
         });
     }
