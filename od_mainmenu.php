@@ -1466,13 +1466,7 @@ class Od_MainMenu extends Module implements WidgetInterface
             $root_id = (int) Db::getInstance()->getValue('SELECT id_category FROM ' . _DB_PREFIX_ . 'category WHERE `is_root_category` = 1');
             $menu = $this->makeMenu($root_id);
         }
-
-        $page_identifier = $this->getCurrentPageIdentifier();
-        // Mark the current page
-        return $this->mapTree(function (array $node) use ($page_identifier) {
-            $node['current'] = ($page_identifier === $node['page_identifier']);
-            return $node;
-        }, $menu);
+        return  $menu;
     }
 
     public function renderWidget($hookName, array $configuration)
