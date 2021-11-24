@@ -701,11 +701,12 @@ class Od_MainMenu extends Module implements WidgetInterface
                     break;
             }
         }
-
-        return $this->mapTree(function ($node, $depth) {
-            $node['depth'] = $depth;
-            return $node;
-        }, $root_node);
+        return $root_node;
+        
+        // return $this->mapTree(function ($node, $depth) {
+        //     $node['depth'] = $depth;
+        //     return $node;
+        // }, $root_node);
     }
 
     protected function mapTree(callable $cb, array $node, $depth = 0)
