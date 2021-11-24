@@ -145,10 +145,8 @@ function refreshSubmenu(){
     
     //Desktop, cleans menu when re-entering.
     //Mobile to desktop clean marked categories
-    $(document).on( 'mouseenter','#_desktop_header-menu', function(){
-        $(this).find('.collapse .show').removeClass('show');
-    });
     $(document).on( 'mouseleave','#_desktop_header-menu', function(){
+        $(this).find('.collapse .show').removeClass('show');
         $(this).find('div[aria-expanded="true"]').attr('aria-expanded',false);
     });
 
