@@ -1451,7 +1451,6 @@ class Od_MainMenu extends Module implements WidgetInterface
     public function getWidgetVariables($hookName, array $configuration)
     {
         $id_lang = $this->context->language->id;
-        $id_shop = $this->context->shop->id;
 
         if (isset($configuration['id_category'])) {
             $depth = $configuration['depth'];
@@ -1461,22 +1460,12 @@ class Od_MainMenu extends Module implements WidgetInterface
             }
         }
 
-        $this->user_groups = Customer::getGroupsStatic($this->context->customer->id);
-        // $key = self::MENU_JSON_CACHE_KEY . '_' . $id_lang . '_' . $id_shop . join('_', $this->user_groups) . '.json';
-        // $cacheDir = $this->getCacheDirectory();
-        // $cacheFile = $cacheDir . DIRECTORY_SEPARATOR . $key;
-        // $menu = json_decode(@file_get_contents($cacheFile), true);
-
         if (isset($configuration['id_category'])) {
             $menu = $this->makeMenu($id, $depth);
         } else {
             $root_id = (int) Db::getInstance()->getValue('SELECT id_category FROM ' . _DB_PREFIX_ . 'category WHERE `is_root_category` = 1');
             $menu = $this->makeMenu($root_id);
         }
-        // if (!is_dir($cacheDir)) {
-        //     mkdir($cacheDir);
-        // }
-        // file_put_contents($cacheFile, json_encode($menu));
 
         $page_identifier = $this->getCurrentPageIdentifier();
         // Mark the current page
