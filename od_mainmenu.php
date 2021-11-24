@@ -1456,13 +1456,11 @@ class Od_MainMenu extends Module implements WidgetInterface
             if (empty(Category::getChildren($id, $this->context->language->id))) {
                 return [];
             }
-            $menu = $this->makeMenu($id, $depth);
+            return $this->makeMenu($id, $depth);
         }
-         else {
-            $root_id = (int) Db::getInstance()->getValue('SELECT id_category FROM ' . _DB_PREFIX_ . 'category WHERE `is_root_category` = 1');
-            $menu = $this->makeMenu($root_id);
-        }
-        return  $menu;
+
+        $root_id = (int) Db::getInstance()->getValue('SELECT id_category FROM ' . _DB_PREFIX_ . 'category WHERE `is_root_category` = 1');
+        return $this->makeMenu($root_id);
     }
 
     public function renderWidget($hookName, array $configuration)
