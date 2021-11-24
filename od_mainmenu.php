@@ -1450,13 +1450,11 @@ class Od_MainMenu extends Module implements WidgetInterface
 
     public function getWidgetVariables($hookName, array $configuration)
     {
-        $id_lang = $this->context->language->id;
-
         if (isset($configuration['id_category'])) {
             $depth = $configuration['depth'];
             $id = $configuration['id_category'];
-            if (empty(Category::getChildren($id, $id_lang))) {
-                return;
+            if (empty(Category::getChildren($id, $this->context->language->id))) {
+                return [];
             }
             $menu = $this->makeMenu($id, $depth);
         }
