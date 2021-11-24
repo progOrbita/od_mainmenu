@@ -1486,23 +1486,29 @@ class Od_MainMenu extends Module implements WidgetInterface
 
     public function renderWidget($hookName, array $configuration)
     {
-        $parents_query = Db::getInstance()->executeS('SELECT DISTINCT id_parent FROM `' . _DB_PREFIX_ . 'category` WHERE active = 1');
-        $parents = [];
-        //parents are category-id, to compare with the page identifier
-        foreach ($parents_query as $value) {
-            $parents['category-' . $value['id_parent']] = 1;
-        }
-
-        $this->smarty->assign([
-            'menu' => $this->getWidgetVariables($hookName, $configuration),
-            'parents' => $parents
-        ]);
         if (isset($configuration['id_category'])) {
+            //Only parents with active childs
+            $parents_query = Db::getInstance()->executeS('SELECT DISTINCT id_parent FROM `' . _DB_PREFIX_ . 'category` WHERE active = 1');
+            $parents = [];
+            //parents are category-id, to compare with the page identifier
+            foreach ($parents_query as $value) {
+                $parents['category-' . $value['id_parent']] = 1;
+            }
+
             $this->smarty->assign([
+                'menu' => $this->getWidgetVariables($hookName, $configuration),
+                'parents' => $parents,
                 'base_depth' => $configuration['depth'] + 1
             ]);
             return $this->fetch('module:od_mainmenu/od_childs.tpl');
         }
-        return $this->fetch('module:od_mainmenu/od_mainmenu.tpl');
+        else{
+            $parents['category-1'] = 1;
+            $this->smarty->assign([
+                'menu' => $this->getWidgetVariables($hookName, $configuration),
+                'parents' => $parents
+            ]);
+            return $this->fetch('module:od_mainmenu/od_mainmenu.tpl');
+        }
     }
 }
