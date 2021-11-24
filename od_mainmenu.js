@@ -7,8 +7,10 @@ const categories_displayed = [];
 const index = $(document).find('#category-1');
 var category;
 var request;
+    //default max width for mobile limited by prestashop
+var minWidth = 768;
 
-window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
+window.innerWidth >= minWidth ? is_mobile = 0 : is_mobile = 1;
 
 /**
 * Obtains the id of the category from the DOM element
@@ -34,7 +36,8 @@ function refreshSubmenu(){
 }
 
     window.onresize = function(){
-        window.innerWidth > 767 ? is_mobile = 0 : is_mobile = 1;
+
+        window.innerWidth > minWidth ? is_mobile = 0 : is_mobile = 1;
         if(!is_mobile){
             //Desktop, hide arrows and reset height from submenus
             $('span.nav-link').removeClass('show');
