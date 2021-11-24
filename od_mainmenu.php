@@ -535,7 +535,7 @@ class Od_MainMenu extends Module implements WidgetInterface
         return $node;
     }
 
-    protected function makeMenu($id_cat, $depth = 0)
+    protected function makeMenu($id_cat, $cat_depth = 0)
     {
         $root_node = $this->makeNode([
             'label' => null,
@@ -558,8 +558,9 @@ class Od_MainMenu extends Module implements WidgetInterface
             switch (substr($item, 0, strlen($value[1]))) {
                 case 'CAT':
                     $id = $id_cat;
+                    //Depth from html and database is different by 1, it's 2 to obtain the childs.
                     $categories = $this->generateCategoriesMenu(
-                        Category::getNestedCategories($id, $id_lang, false, $this->user_groups, true, " AND c.`level_depth` < " . ($depth + 3) . " ")
+                        Category::getNestedCategories($id, $id_lang, false, $this->user_groups, true, " AND c.`level_depth` <= " . ($cat_depth + 2) . " ")
                     );
                     $root_node['children'] = array_merge($root_node['children'], $categories);
                     break;
