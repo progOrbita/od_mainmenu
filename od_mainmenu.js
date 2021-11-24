@@ -23,7 +23,7 @@ function getCategoryId(element){
 }
 
 /**
-* Refresh submenu by removing the underline and hide the submenus opened
+* Refresh submenu by removing the underline and hiding the submenus opened
 * @returns void
 */
 
@@ -39,7 +39,7 @@ function refreshSubmenu(){
 
         window.innerWidth > minWidth ? is_mobile = 0 : is_mobile = 1;
         if(!is_mobile){
-            //Desktop, hide arrows and reset height from submenus
+            //Desktop, hide arrows and reset opened menu
             $('span.nav-link').removeClass('show');
             $('span.nav-link').addClass('hidden');
             $('div.item-header[aria-expanded="true"]').attr('aria-expanded','false');
@@ -61,6 +61,7 @@ function refreshSubmenu(){
      */
     function generateMenu(index){
         let selected_cat;
+        //index exist only when clicked on mobile icon
         index ? selected_cat = index : selected_cat = $(this);
 
         let id_category = getCategoryId(selected_cat);
@@ -76,9 +77,11 @@ function refreshSubmenu(){
         if(category == id_category){
             return;
         }
+        //Mobile can have various calls at same time
         if(request && !is_mobile){
             request.abort();
         }
+        //Mobile version, assign before the request to avoid the ajax call.
         if(is_mobile){
             category = id_category;
         }
@@ -89,15 +92,17 @@ function refreshSubmenu(){
                 ajax: true,id_category,category_depth,
             },
             success: function(data){
+                //After the call because is aborted if exit from selected category and can't duplicate the calls.
+                //If is added outside the request it would need to select a category not added before a new attempt
                 if(!is_mobile){
                     category = id_category;
                 }
-                //empty, parents without childs don't insert anything
+                //empty field are parents without childs, so it doesn't nned to insert text
                 categories_displayed.push(id_category);
                 if(data.replace(/\s/g,"") == ""){
                     return;
                 }
-
+                //Childs are appended to the last div of the parent (top_sub_menu)
                 selected_cat.find('div:last-child').append(data);
                 //Mobile smooth animation requires an height based on number of childs
                 if(is_mobile){
@@ -128,6 +133,9 @@ function refreshSubmenu(){
             }
         }
     });
+    /**
+     * Desktop. Sub-categories from second menu. When exit hide submenus, remove underline and stop the current request
+     */
     $(document).on('mouseleave', "div.collapse .show", function() {
         if(!is_mobile){
             request.abort();
@@ -135,14 +143,16 @@ function refreshSubmenu(){
         }
     });
     
-    //refresh desktop menu when re-entering
+    //Desktop, cleans menu when re-entering.
+    //Mobile to desktop clean marked categories
     $(document).on( 'mouseenter','#_desktop_header-menu', function(){
         $(this).find('.collapse .show').removeClass('show');
     });
     $(document).on( 'mouseleave','#_desktop_header-menu', function(){
         $(this).find('div[aria-expanded="true"]').attr('aria-expanded',false);
     });
-    
+
+    //Desktop, generate childs. Also shows the categories from selected menu category (discount, satellite, receivers...)
     $(document).on( 'mouseenter','.category', function(){
         if(!is_mobile){
             generateMenu.call(this);
@@ -160,6 +170,7 @@ function refreshSubmenu(){
             }
         }
     });
+    //Desktop, hide category selected from menu when exit.
     $(document).on( 'mouseleave','.category', function(){
         let selected_depth = parseInt($(this).find('.nav-link').data('depth'));
         if(!is_mobile && selected_depth === 1){
@@ -167,7 +178,7 @@ function refreshSubmenu(){
             $(this).find('div:nth-child(1)').attr('aria-expanded',false);
             $(this).find('div:nth-child(2)').first().removeClass('show');
         }
-        //avoid menu generation if exit the tab
+        //avoid menu generation if exit the box
         let id_root = getCategoryId(index);
         if(!categories_displayed.includes(id_root)){
             request.abort();
@@ -177,6 +188,7 @@ function refreshSubmenu(){
     $(document).on( 'click','.menu-icon', function(){
         generateMenu(index);
     });
+    //Desktop to mobile, refresh childs from current category style and generate the childs. For level-depth - 3
     $(document).on( 'click','.category', function(){
         if(is_mobile){
             //refresh mobile menu styles
