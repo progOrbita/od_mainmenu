@@ -164,10 +164,9 @@ function refreshSubmenu(){
                 $(this).find('div:nth-child(2)').first().addClass('show');
             }
         }
-        if(is_mobile){
-            if($('#top-menu').find('div').css('height') != null){
-                $('#top-menu').find('div').css('height','');
-            }
+        //remove height style from mobile animation
+        if($('#top-menu').find('div').css('height') != null){
+            $('#top-menu').find('div').css('height','');
         }
     });
     //Desktop, hide category selected from menu when exit.
