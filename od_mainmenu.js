@@ -188,8 +188,6 @@ function refreshSubmenu(){
     //Desktop to mobile, refresh childs from current category style and generate the childs. For level-depth - 3
     $(document).on( 'click','.category', function(){
         if(is_mobile){
-            //refresh mobile menu styles
-            $('#_mobile_header-menu').find('.underline').removeClass('underline');
             $(this).find('.hidden').removeClass('hidden');
             generateMenu.call(this);
         }
