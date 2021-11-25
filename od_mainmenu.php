@@ -1463,7 +1463,6 @@ class Od_MainMenu extends Module implements WidgetInterface
         if (isset($configuration['id_category'])) {
             //Only parents with active childs
             $parents_query = Db::getInstance()->executeS('SELECT DISTINCT id_parent FROM `' . _DB_PREFIX_ . 'category` WHERE active = 1');
-            $parents = [];
             //parents are category-id, to compare with the page identifier
             foreach ($parents_query as $value) {
                 $parents['category-' . $value['id_parent']] = 1;
@@ -1472,11 +1471,10 @@ class Od_MainMenu extends Module implements WidgetInterface
             $this->smarty->assign([
                 'menu' => $this->getWidgetVariables($hookName, $configuration),
                 'parents' => $parents,
-                'base_depth' => $configuration['depth'] + 1
+                'base_depth' => $configuration['depth'] + 1 //Base depth differ from database by 1.
             ]);
             return $this->fetch('module:od_mainmenu/od_childs.tpl');
-        }
-        else{
+        } else {
             $parents['category-1'] = 1;
             $this->smarty->assign([
                 'menu' => $this->getWidgetVariables($hookName, $configuration),
