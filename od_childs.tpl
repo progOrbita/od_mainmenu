@@ -29,13 +29,17 @@
 *}
 {assign var=_isparent value=$parents}
 
-{assign var=_counter value=0}
+{* 
+assign var=_counter value=0 
+*}
 {function name="menu" nodes=[] depth=0 parent=null}
   {if $nodes|count}
     <ul class="top-menu" data-depth="{$depth}">
       {foreach from=$nodes item=node}
         <li class="{$node.type}{if $node.current} current {/if}" id="{$node.page_identifier}">
-          {assign var=_counter value=$_counter+1}
+          {*
+          assign var=_counter value=$_counter+1
+          *}
           {if $_isparent[{$node.page_identifier}]}
             {assign var=_expand_id value=10|mt_rand:100000}
             <div data-target="#top_sub_menu_{$_expand_id}" data-toggle="collapse" class="item-header collapsed" aria-expanded="false">
@@ -59,7 +63,7 @@
         </li>
       {/foreach}
     </ul>
-{/if}
+  {/if}
 {/function}
 
 {*<div class="menu js-top-menu col">*}
