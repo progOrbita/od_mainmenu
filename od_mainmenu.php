@@ -179,6 +179,15 @@ class Od_MainMenu extends Module implements WidgetInterface
                 'priority' => 1000,
             ]
         );
+        $this->context->controller->registerJavascript(
+            'js-cookie',
+            'https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js',
+            [
+                'server' => 'remote',
+                'position' => 'bottom',
+                'priority' => 1000,
+            ]
+        );
 
         $this->context->controller->addCSS(_MODULE_DIR_ . $this->name . '/views/css/od_mainmenunew.css');
         $this->context->controller->addJS(_MODULE_DIR_ . $this->name . '/views/js/od_notes.js');
